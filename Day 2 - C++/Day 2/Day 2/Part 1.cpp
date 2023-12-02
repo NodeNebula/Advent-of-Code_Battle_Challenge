@@ -13,8 +13,6 @@ int main() {
 
     if (myfile.is_open()) {
         while (getline(myfile, line)) {
-            // cout << line << "\n";
-
             istringstream ss(line);
             string pull;
             bool hasHigher = false;
@@ -51,7 +49,6 @@ int main() {
             if (!hasHigher) {
                 total += currentline;
             }
-            // string test = line.substr();
         }
         myfile.close();
     } else cout << "Unable to open file";
