@@ -16,17 +16,18 @@ public class PartTwo {
                 String stringNumberFirst = "";
                 String stringNumberLast = "";
                 String[][] numbers = {{"one", "1"}, {"two", "2"}, {"three", "3"}, {"four", "4"}, {"five", "5"},
-                        {"six" , "6"}, {"seven", "7"}, {"eight", "8"}, {"nine", "9"}, {"zero", "0"}};
-                int indexFirst = 0;
+                        {"six" , "6"}, {"seven", "7"}, {"eight", "8"}, {"nine", "9"}};
+                int indexFirst = 1000;
                 int indexLast = 0;
 
-                for (int i = 0; i < line.length(); i++) {
+                for (int i = 0; i <= line.length(); i++) {
                     if (Character.isDigit(line.charAt(i))) {
                         stringNumberFirst = String.valueOf(line.charAt(i));
                         indexFirst = i;
                         break;
                     }
                 }
+
                 for (String[] s : numbers) {
                     if (line.contains(s[0]) && line.indexOf(s[0]) < indexFirst) {
                         indexFirst = line.indexOf(s[0]);
@@ -34,7 +35,7 @@ public class PartTwo {
                     }
                 }
 
-                for (int i = line.length() - 1; i > 0; i--) {
+                for (int i = line.length() - 1; i >= 0; i--) {
                     if (Character.isDigit(line.charAt(i))) {
                         stringNumberLast = String.valueOf(line.charAt(i));
                         indexLast = i;
@@ -42,12 +43,17 @@ public class PartTwo {
                     }
                 }
                 for (String[] s : numbers) {
-                    if (line.contains(s[0]) && line.indexOf(s[0]) > indexLast) {
-                        indexLast = line.indexOf(s[0]);
+                    if (line.contains(s[0]) && line.lastIndexOf(s[0]) > indexLast) {
+                        indexLast = line.lastIndexOf(s[0]);
                         stringNumberLast = s[1];
                     }
                 }
+
+                total += Integer.parseInt(stringNumberFirst + stringNumberLast);
             }
+
+            System.out.println(total);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
