@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Day 2 - C++/Day 2/.vs/Day 2/FileContentIndex/31ec0b51-a6c4-489f-b78b-4ff2047f2e6c.vsidx
+/Day 2 - C++/Day 2/.vs/Day 2/FileContentIndex/c2f8879c-4be4-4084-b413-014d7d6650f6.vsidx
+*.opendb
