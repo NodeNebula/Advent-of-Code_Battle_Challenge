@@ -1,7 +1,2 @@
 ﻿  Part 1.cpp
-D:\Github repos\Advent-of-Code_Battle_Challenge\Day 2 - C++\Day 2\Day 2\Part 1.cpp(23,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Github repos\Advent-of-Code_Battle_Challenge\Day 2 - C++\Day 2\Day 2\Part 1.cpp(24,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\Github repos\Advent-of-Code_Battle_Challenge\Day 2 - C++\Day 2\Day 2\Part 1.cpp(25,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Part 2.cpp
-  Generating Code...
   Day 2.vcxproj -> D:\Github repos\Advent-of-Code_Battle_Challenge\Day 2 - C++\Day 2\x64\Debug\Day 2.exe

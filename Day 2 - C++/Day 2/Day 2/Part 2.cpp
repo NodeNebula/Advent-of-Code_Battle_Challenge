@@ -33,12 +33,15 @@ int main() {
 
 				if (posred != -1 && stoi(pull.substr(posred - 3, 2)) > highred) {
 					highred = stoi(pull.substr(posred - 3, 2));
+					hasred = true;
 				}
 				if (posgrn != -1 && stoi(pull.substr(posgrn - 3, 2)) > highgrn) {
 					highgrn = stoi(pull.substr(posgrn - 3, 2));
+					hasgrn = true;
 				}
 				if (posblu != -1 && stoi(pull.substr(posblu - 3, 2)) > highblu) {
 					highblu = stoi(pull.substr(posblu - 3, 2));
+					hasblu = true;
 				}
 			}
 
@@ -69,6 +72,7 @@ int main() {
 			}
 
 			total += currentnr;
+			// 0
 		}
 	}
 
