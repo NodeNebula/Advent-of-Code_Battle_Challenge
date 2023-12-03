@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Part 1.cpp" />
+    <ClCompile Include="Part 2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />

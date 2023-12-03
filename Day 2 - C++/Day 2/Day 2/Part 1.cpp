@@ -28,21 +28,14 @@ int main() {
                 const int maxgrn = 13;
                 const int maxblu = 14;
 
-                if (posred != -1) {
-                    if (stoi(pull.substr(posred - 3, 2)) > maxred) {
-                        hasHigher = true;
-                    }
+                if (posred != -1 && stoi(pull.substr(posred - 3, 2)) > maxred) {
+                    hasHigher = true;
                 }
-                if (posgrn != -1) {
-                    if (stoi(pull.substr(posgrn - 3, 2)) > maxgrn) {
-                        hasHigher = true;
-                    }
-
+                if (posgrn != -1 && stoi(pull.substr(posgrn - 3, 2)) > maxgrn) {
+                    hasHigher = true;
                 }
-                if (posblu != -1) {
-                    if (stoi(pull.substr(posblu - 3, 2)) > maxblu) {
-                        hasHigher = true;
-                    }
+                if (posblu != -1 && stoi(pull.substr(posblu - 3, 2)) > maxblu) {
+                    hasHigher = true;
                 }
             }
 
@@ -51,12 +44,8 @@ int main() {
             }
         }
         myfile.close();
-    } else cout << "Unable to open file";
+    }
 
-    cout << total << "\n";
+    std::cout << total << "\n";
     return 0;
 }
-
-// 5050 too high
-
-// 2330 too low
