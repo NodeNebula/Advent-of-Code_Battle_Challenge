@@ -72,7 +72,6 @@ int main() {
 			}
 
 			total += currentnr;
-			// 0
 		}
 	}
 
