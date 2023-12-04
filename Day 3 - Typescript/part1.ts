@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
 function containsSym(arr: string[][]): boolean {
-  const symList: string[] = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '[', ']', '{', '}', ';', ':', "'", '"', '\\', '|', ',', '<', '>', '/', '?', '~'];
+  const symList: string[] = ['@', '*', '/', '#', '+', '-', '&', '=', '$', '%', '&'];
   
   for (const row of arr) {
     for (const char of row) {
@@ -11,7 +11,7 @@ function containsSym(arr: string[][]): boolean {
   return false;
 }
 
-const input = fs.readFileSync('test.txt', 'utf-8');
+const input = fs.readFileSync('input.txt', 'utf-8');
 const lines = input.split('\r\n');
 
 let total: number = 0;
@@ -24,7 +24,6 @@ for (const line of lines) {
   for (const char of line) {
     charCount++;
     
-      // console.log(lineCount + "-" + charCount + " " + char + "-" + line[charCount])
     if (!isNaN(Number(char))) {
       if (charCount > 0 && !isNaN(Number(line[charCount - 1]))) continue;
 
@@ -57,6 +56,4 @@ for (const line of lines) {
     }
   }
 }
-
 console.log(total);
-// 4361 too low
