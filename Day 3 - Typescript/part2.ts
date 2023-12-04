@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-const input = fs.readFileSync('test.txt', 'utf-8');
+const input = fs.readFileSync('input.txt', 'utf-8');
 const lines = input.split('\r\n');
 
 let total: number = 0;
@@ -17,17 +17,15 @@ for (const line of lines) {
 
     let numberCheck: string[][] = [];
 
-    try {
-      for (let i = 0; i < 3; i++) {
-        numberCheck[i] = [];
-        for (let j = 0; j < 7; j++) {
+    for (let i = 0; i < 3; i++) {
+      numberCheck[i] = [];
+      for (let j = 0; j < 7; j++) {
+        try {
           numberCheck[i].push(lines[lineCount + i - 1][charCount + j - 3]);
-        }
+        } catch (TypeError) {}
       }
-    } catch (TypeError) {}
+    }
 
-    // console.log(numberCheck);
-    
     let numberList: string[] = [];
     let nextNum: number = 0;
 

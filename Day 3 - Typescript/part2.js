@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
-var input = fs.readFileSync('test.txt', 'utf-8');
+var input = fs.readFileSync('input.txt', 'utf-8');
 var lines = input.split('\r\n');
 var total = 0;
 var lineCount = -1;
@@ -15,16 +15,15 @@ for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         if (char != '*')
             continue;
         var numberCheck = [];
-        try {
-            for (var i = 0; i < 3; i++) {
-                numberCheck[i] = [];
-                for (var j = 0; j < 7; j++) {
+        for (var i = 0; i < 3; i++) {
+            numberCheck[i] = [];
+            for (var j = 0; j < 7; j++) {
+                try {
                     numberCheck[i].push(lines[lineCount + i - 1][charCount + j - 3]);
                 }
+                catch (TypeError) { }
             }
         }
-        catch (TypeError) { }
-        // console.log(numberCheck);
         var numberList = [];
         var nextNum = 0;
         for (var i = 0; i < numberCheck.length; i++) {
