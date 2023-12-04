@@ -32,6 +32,7 @@ for (const line of lines) {
     for (let i = 0; i < numberCheck.length; i++) {
       for (let j = 0; j < numberCheck[i].length; j++) {
 
+        if (j < 1 && numberCheck[i][1] === ".") j = 2;
         if (j < 2 && numberCheck[i][2] === ".") j = 3;
         if (j === 4 && numberCheck[i][j] === ".") break;
         if (j === 5 && numberCheck[i][j] === ".") break;
@@ -67,4 +68,5 @@ for (const line of lines) {
 console.log(total);
 
 // 73662618 too low
+// 76314915
 

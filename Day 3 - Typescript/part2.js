@@ -28,6 +28,8 @@ for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
         var nextNum = 0;
         for (var i = 0; i < numberCheck.length; i++) {
             for (var j = 0; j < numberCheck[i].length; j++) {
+                if (j < 1 && numberCheck[i][1] === ".")
+                    j = 2;
                 if (j < 2 && numberCheck[i][2] === ".")
                     j = 3;
                 if (j === 4 && numberCheck[i][j] === ".")
@@ -63,3 +65,4 @@ for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
 }
 console.log(total);
 // 73662618 too low
+// 73662618
