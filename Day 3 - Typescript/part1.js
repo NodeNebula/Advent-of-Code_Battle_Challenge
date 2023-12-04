@@ -1,11 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
-// function checkChar(string: character): boolean {
-//   return ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '[', ']', '{', '}', ';', ':', "'", '"', '\\', '|', ',', '<', '>', '/', '?', '~'].includes(character);
-// }
+function containsSym(arr) {
+    var symList = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '[', ']', '{', '}', ';', ':', "'", '"', '\\', '|', ',', '<', '>', '/', '?', '~'];
+    for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
+        var row = arr_1[_i];
+        for (var _a = 0, row_1 = row; _a < row_1.length; _a++) {
+            var char = row_1[_a];
+            if (symList.includes(char))
+                return true;
+        }
+    }
+    return false;
+}
 var input = fs.readFileSync('test.txt', 'utf-8');
 var lines = input.split('\r\n');
+var total = 0;
 var lineCount = -1;
 for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
     var line = lines_1[_i];
@@ -26,19 +36,23 @@ for (var _i = 0, lines_1 = lines; _i < lines_1.length; _i++) {
                     num = num + line[charCount + 2];
                 }
             }
-            console.log(num);
-            var numbersCheck = [];
-            for (var i = -1; i < 1; i++) {
-                if (charCount == 0 && i == -1)
-                    continue;
-                for (var j = -1; j < 2; j++) {
-                    if (lineCount == 0 && j == -1)
-                        continue;
-                    numbersCheck[i + 1] = [];
-                    numbersCheck[i + 1].push(lines[lineCount + j][charCount + i]);
+            var checkLenght = num.length + 2;
+            var numberCheck = [];
+            for (var i = 0; i < 3; i++) {
+                numberCheck[i] = [];
+                for (var j = 0; j < checkLenght; j++) {
+                    try {
+                        numberCheck[i].push(lines[lineCount + i - 1][charCount + j - 1]);
+                    }
+                    catch (TypeError) {
+                        numberCheck[i].push();
+                    }
                 }
             }
-            console.log(numbersCheck);
+            if (containsSym(numberCheck)) {
+                total += Number(num);
+            }
         }
     }
 }
+console.log(total);

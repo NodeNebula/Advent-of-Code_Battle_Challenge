@@ -1,11 +1,20 @@
 import * as fs from 'fs';
 
-// function checkChar(string: character): boolean {
-//   return ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '[', ']', '{', '}', ';', ':', "'", '"', '\\', '|', ',', '<', '>', '/', '?', '~'].includes(character);
-// }
+function containsSym(arr: string[][]): boolean {
+  const symList: string[] = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '[', ']', '{', '}', ';', ':', "'", '"', '\\', '|', ',', '<', '>', '/', '?', '~'];
+  
+  for (const row of arr) {
+    for (const char of row) {
+      if (symList.includes(char)) return true;
+    }
+  }
+  return false;
+}
 
 const input = fs.readFileSync('test.txt', 'utf-8');
 const lines = input.split('\r\n');
+
+let total: number = 0;
 
 let lineCount: number = -1;
 for (const line of lines) {
@@ -28,21 +37,26 @@ for (const line of lines) {
           num = num + line[charCount + 2];
         }
       }
-      console.log(num);
 
-      let numbersCheck: string[][] = [];
-
-      for (let i = -1; i < 1; i++) {
-        if (charCount == 0 && i == -1) continue;
-        for (let j = -1; j < 2; j++) {
-          if (lineCount == 0 && j == -1) continue;
-
-          numbersCheck[i + 1] = [];
-          numbersCheck[i + 1].push(lines[lineCount + j][charCount + i]);
+      const checkLenght: number = num.length + 2;
+      let numberCheck: string[][] = [];
+      
+      for (let i = 0; i < 3; i++) {
+        numberCheck[i] = [];
+        for (let j = 0; j < checkLenght; j++) {
+          try {
+            numberCheck[i].push(lines[lineCount + i - 1][charCount + j - 1]);
+          } catch (TypeError) {
+            numberCheck[i].push();
+          }
         }
       }
-      console.log(numbersCheck);
-
+      if (containsSym(numberCheck)) {
+        total += Number(num);
+      }
     }
   }
 }
+
+console.log(total);
+// 4361 too low
