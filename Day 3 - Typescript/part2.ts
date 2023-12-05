@@ -66,7 +66,3 @@ for (const line of lines) {
 }
 
 console.log(total);
-
-// 73662618 too low
-// 76314915
-
