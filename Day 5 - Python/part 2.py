@@ -1,11 +1,17 @@
 searching = {"sts": False, "stf": False, "ftw": False, "wtl": False, "ltt": False, "tth": False, "htl": False}
 
+seedInfo = []
 sts, stf, ftw, wtl, ltt, tth, htl = [], [], [], [], [], [], []
 
 with open("input.txt") as file:
     for line in file:
         if "seeds:" in line:
             seeds = line.split(":")[1].strip(" ").strip("\n").split(" ")
+            for info in range(len(seeds)):
+                if info % 2 != 0:
+                    continue
+                else:
+                    seedInfo.append([seeds[info], seeds[info + 1]])
 
         elif "seed-to-soil map:" in line or searching["sts"]:
             if line.startswith("\n"):
@@ -100,35 +106,45 @@ with open("input.txt") as file:
 
 newSeeds = []
 
-for seed in seeds:
-    for i in sts:
-        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
-            seed = str(int(seed) + int(i[0]))
-            break
-    for i in stf:
-        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
-            seed = str(int(seed) + int(i[0]))
-            break
-    for i in ftw:
-        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
-            seed = str(int(seed) + int(i[0]))
-            break
-    for i in wtl:
-        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
-            seed = str(int(seed) + int(i[0]))
-            break
-    for i in ltt:
-        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
-            seed = str(int(seed) + int(i[0]))
-            break
-    for i in tth:
-        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
-            seed = str(int(seed) + int(i[0]))
-            break
-    for i in htl:
-        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
-            seed = str(int(seed) + int(i[0]))
-            break
-    newSeeds.append(int(seed))
+for i in range(len(seedInfo)):
+    currentSeed = str(int(seedInfo[i][0]) - 1)
+    staticSeed = currentSeed
+    for j in range(int(seedInfo[i][1])):
+
+        print(staticSeed, "-", j)
+
+        currentSeed = str(int(currentSeed) + 1)
+        seed = str(int(currentSeed) + 1)
+
+        for o in sts:
+            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+                seed = str(int(seed) + int(o[0]))
+                break
+        for o in stf:
+            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+                seed = str(int(seed) + int(o[0]))
+                break
+        for o in ftw:
+            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+                seed = str(int(seed) + int(o[0]))
+                break
+        for o in wtl:
+            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+                seed = str(int(seed) + int(o[0]))
+                break
+        for o in ltt:
+            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+                seed = str(int(seed) + int(o[0]))
+                break
+        for o in tth:
+            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+                seed = str(int(seed) + int(o[0]))
+                break
+        for o in htl:
+            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+                seed = str(int(seed) + int(o[0]))
+                break
+
+        newSeeds.append(int(seed))
 
 print(min(newSeeds))
