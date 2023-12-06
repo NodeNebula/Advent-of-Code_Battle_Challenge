@@ -1,14 +1,8 @@
 searching = {"sts": False, "stf": False, "ftw": False, "wtl": False, "ltt": False, "tth": False, "htl": False}
 
-sts = []
-stf = []
-ftw = []
-wtl = []
-ltt = []
-tth = []
-htl = []
+sts, stf, ftw, wtl, ltt, tth, htl = [], [], [], [], [], [], []
 
-with open("test.txt") as file:
+with open("input.txt") as file:
     for line in file:
         if "seeds:" in line:
             seeds = line.split(":")[1].strip(" ").strip("\n").split(" ")
@@ -20,7 +14,7 @@ with open("test.txt") as file:
             if searching["sts"]:
                 current = line.strip("\n").split(" ")
                 sts.append([
-                    [current[0], str(int(current[0]) + int(current[2]) - 1)],
+                    str(int(current[0]) - int(current[1])),
                     [current[1], str(int(current[1]) + int(current[2]) - 1)]
                 ])
             if not searching["sts"]:
@@ -33,7 +27,7 @@ with open("test.txt") as file:
             if searching["stf"]:
                 current = line.strip("\n").split(" ")
                 stf.append([
-                    [current[0], str(int(current[0]) + int(current[2]) - 1)],
+                    str(int(current[0]) - int(current[1])),
                     [current[1], str(int(current[1]) + int(current[2]) - 1)]
                 ])
             if not searching["stf"]:
@@ -46,7 +40,7 @@ with open("test.txt") as file:
             if searching["ftw"]:
                 current = line.strip("\n").split(" ")
                 ftw.append([
-                    [current[0], str(int(current[0]) + int(current[2]) - 1)],
+                    str(int(current[0]) - int(current[1])),
                     [current[1], str(int(current[1]) + int(current[2]) - 1)]
                 ])
             if not searching["ftw"]:
@@ -59,7 +53,7 @@ with open("test.txt") as file:
             if searching["wtl"]:
                 current = line.strip("\n").split(" ")
                 wtl.append([
-                    [current[0], str(int(current[0]) + int(current[2]) - 1)],
+                    str(int(current[0]) - int(current[1])),
                     [current[1], str(int(current[1]) + int(current[2]) - 1)]
                 ])
             if not searching["wtl"]:
@@ -72,7 +66,7 @@ with open("test.txt") as file:
             if searching["ltt"]:
                 current = line.strip("\n").split(" ")
                 ltt.append([
-                    [current[0], str(int(current[0]) + int(current[2]) - 1)],
+                    str(int(current[0]) - int(current[1])),
                     [current[1], str(int(current[1]) + int(current[2]) - 1)]
                 ])
             if not searching["ltt"]:
@@ -85,7 +79,7 @@ with open("test.txt") as file:
             if searching["tth"]:
                 current = line.strip("\n").split(" ")
                 tth.append([
-                    [current[0], str(int(current[0]) + int(current[2]) - 1)],
+                    str(int(current[0]) - int(current[1])),
                     [current[1], str(int(current[1]) + int(current[2]) - 1)]
                 ])
             if not searching["tth"]:
@@ -98,16 +92,56 @@ with open("test.txt") as file:
             if searching["htl"]:
                 current = line.strip("\n").split(" ")
                 htl.append([
-                    [current[0], str(int(current[0]) + int(current[2]) - 1)],
+                    str(int(current[0]) - int(current[1])),
                     [current[1], str(int(current[1]) + int(current[2]) - 1)]
                 ])
             if not searching["htl"]:
                 searching["htl"] = True
 
-print(sts)
-print(stf)
-print(ftw)
-print(wtl)
-print(ltt)
-print(tth)
-print(htl)
+newSeeds = []
+
+for seed in seeds:
+    for i in sts:
+        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
+            seed = str(int(seed) + int(i[0]))
+            break
+    for i in stf:
+        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
+            seed = str(int(seed) + int(i[0]))
+            break
+    for i in ftw:
+        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
+            seed = str(int(seed) + int(i[0]))
+            break
+    for i in wtl:
+        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
+            seed = str(int(seed) + int(i[0]))
+            break
+    for i in ltt:
+        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
+            seed = str(int(seed) + int(i[0]))
+            break
+    for i in tth:
+        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
+            seed = str(int(seed) + int(i[0]))
+            break
+    for i in htl:
+        if int(i[1][0]) <= int(seed) <= int(i[1][1]):
+            seed = str(int(seed) + int(i[0]))
+            break
+    newSeeds.append(int(seed))
+
+print(min(newSeeds))
+
+# 3832297855 Too high
+# -790663246 Wrong
+# -1209539424 Wrong
+
+# print(seeds)
+# print(sts)
+# print(stf)
+# print(ftw)
+# print(wtl)
+# print(ltt)
+# print(tth)
+# print(htl)
