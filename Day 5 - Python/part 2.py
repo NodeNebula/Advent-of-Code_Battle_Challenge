@@ -7,6 +7,7 @@ sts, stf, ftw, wtl, ltt, tth, htl = [], [], [], [], [], [], []
 
 with open("input.txt") as file:
     for line in file:
+        # set the ranges of the seeds: seedInfo = [[seedStartRange, seedEndRange], [...] ]
         if "seeds:" in line:
             seeds = line.split(":")[1].strip(" ").strip("\n").split(" ")
             for info in range(len(seeds)):
@@ -15,6 +16,7 @@ with open("input.txt") as file:
                 else:
                     seedInfo.append([int(seeds[info]), int(seeds[info]) + int(seeds[info + 1])])
 
+        # set the ranges of each map, ex.: sts = [[[mapStartRange, mapEndRange], mapDifferenceConvert], [...]]
         elif "seed-to-soil map:" in line or searching["sts"]:
             if line.startswith("\n"):
                 searching["sts"] = False
@@ -106,6 +108,8 @@ with open("input.txt") as file:
             if not searching["htl"]:
                 searching["htl"] = True
 
+
+# check if given seed value is in range of the seed list
 def inSeedRange(seed):
     for ranges in seedInfo:
         if ranges[0] <= seed <= ranges[1]:
@@ -115,7 +119,9 @@ def inSeedRange(seed):
 closestSeed = 0
 loopCounter = 0
 
+# check every location starting from 0 until its inSeedRange()
 while True:
+    # prints clock every 1 mil iterations
     if loopCounter == 1000000:
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
@@ -125,6 +131,8 @@ while True:
     loopCounter += 1
     currentSeed = closestSeed
     staticSeed = closestSeed
+
+    # backwards calculate from location to seed till it matches a seed in the ranges
     for s in htl:
         if s[0][0] <= currentSeed <= s[0][1]:
             currentSeed = currentSeed + s[1]
@@ -154,8 +162,9 @@ while True:
             currentSeed = currentSeed + s[1]
             break
 
+    # output: answer
     if inSeedRange(currentSeed):
-        print(staticSeed) # <<<< The answer
+        print(staticSeed)  # <<<< The answer
         break
     else:
         closestSeed += 1
