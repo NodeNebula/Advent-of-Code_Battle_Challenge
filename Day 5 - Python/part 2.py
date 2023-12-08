@@ -1,15 +1,11 @@
-def inSeedRange(seed):
-    for ranges in seedInfo:
-        if ranges[0] <= seed <= ranges[1]:
-            return True
-
+from datetime import datetime
 
 searching = {"sts": False, "stf": False, "ftw": False, "wtl": False, "ltt": False, "tth": False, "htl": False}
 
 seedInfo = []
 sts, stf, ftw, wtl, ltt, tth, htl = [], [], [], [], [], [], []
 
-with open("test.txt") as file:
+with open("input.txt") as file:
     for line in file:
         if "seeds:" in line:
             seeds = line.split(":")[1].strip(" ").strip("\n").split(" ")
@@ -26,8 +22,8 @@ with open("test.txt") as file:
             if searching["sts"]:
                 current = line.strip("\n").split(" ")
                 sts.append([
-                    str(int(current[0]) - int(current[1])),
-                    [current[1], str(int(current[1]) + int(current[2]) - 1)]
+                    [int(current[0]), int(current[0]) + int(current[2]) - 1],
+                    int(current[1]) - int(current[0])
                 ])
             if not searching["sts"]:
                 searching["sts"] = True
@@ -39,8 +35,8 @@ with open("test.txt") as file:
             if searching["stf"]:
                 current = line.strip("\n").split(" ")
                 stf.append([
-                    str(int(current[0]) - int(current[1])),
-                    [current[1], str(int(current[1]) + int(current[2]) - 1)]
+                    [int(current[0]), int(current[0]) + int(current[2]) - 1],
+                    int(current[1]) - int(current[0])
                 ])
             if not searching["stf"]:
                 searching["stf"] = True
@@ -52,8 +48,8 @@ with open("test.txt") as file:
             if searching["ftw"]:
                 current = line.strip("\n").split(" ")
                 ftw.append([
-                    str(int(current[0]) - int(current[1])),
-                    [current[1], str(int(current[1]) + int(current[2]) - 1)]
+                    [int(current[0]), int(current[0]) + int(current[2]) - 1],
+                    int(current[1]) - int(current[0])
                 ])
             if not searching["ftw"]:
                 searching["ftw"] = True
@@ -65,8 +61,8 @@ with open("test.txt") as file:
             if searching["wtl"]:
                 current = line.strip("\n").split(" ")
                 wtl.append([
-                    str(int(current[0]) - int(current[1])),
-                    [current[1], str(int(current[1]) + int(current[2]) - 1)]
+                    [int(current[0]), int(current[0]) + int(current[2]) - 1],
+                    int(current[1]) - int(current[0])
                 ])
             if not searching["wtl"]:
                 searching["wtl"] = True
@@ -78,8 +74,8 @@ with open("test.txt") as file:
             if searching["ltt"]:
                 current = line.strip("\n").split(" ")
                 ltt.append([
-                    str(int(current[0]) - int(current[1])),
-                    [current[1], str(int(current[1]) + int(current[2]) - 1)]
+                    [int(current[0]), int(current[0]) + int(current[2]) - 1],
+                    int(current[1]) - int(current[0])
                 ])
             if not searching["ltt"]:
                 searching["ltt"] = True
@@ -91,8 +87,8 @@ with open("test.txt") as file:
             if searching["tth"]:
                 current = line.strip("\n").split(" ")
                 tth.append([
-                    str(int(current[0]) - int(current[1])),
-                    [current[1], str(int(current[1]) + int(current[2]) - 1)]
+                    [int(current[0]), int(current[0]) + int(current[2]) - 1],
+                    int(current[1]) - int(current[0])
                 ])
             if not searching["tth"]:
                 searching["tth"] = True
@@ -104,60 +100,62 @@ with open("test.txt") as file:
             if searching["htl"]:
                 current = line.strip("\n").split(" ")
                 htl.append([
-                    str(int(current[0]) - int(current[1])),
-                    [current[1], str(int(current[1]) + int(current[2]) - 1)]
+                    [int(current[0]), int(current[0]) + int(current[2]) - 1],
+                    int(current[1]) - int(current[0])
                 ])
             if not searching["htl"]:
                 searching["htl"] = True
 
-inSeedRange(seeds)
+def inSeedRange(seed):
+    for ranges in seedInfo:
+        if ranges[0] <= seed <= ranges[1]:
+            return True
 
-# ---------
 
 closestSeed = 0
+loopCounter = 0
 
-# while True:
-#     break
+while True:
+    if loopCounter == 1000000:
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        print(current_time)
+        loopCounter = 0
 
-# for i in range(len(seedInfo)):
-#     currentSeed = str(int(seedInfo[i][0]) - 1)
-#     staticSeed = currentSeed
-#     for j in range(int(seedInfo[i][1])):
-#
-#         print(staticSeed, "-", j)
-#
-#         currentSeed = str(int(currentSeed) + 1)
-#         seed = str(int(currentSeed) + 1)
-#
-#         for o in sts:
-#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-#                 seed = str(int(seed) + int(o[0]))
-#                 break
-#         for o in stf:
-#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-#                 seed = str(int(seed) + int(o[0]))
-#                 break
-#         for o in ftw:
-#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-#                 seed = str(int(seed) + int(o[0]))
-#                 break
-#         for o in wtl:
-#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-#                 seed = str(int(seed) + int(o[0]))
-#                 break
-#         for o in ltt:
-#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-#                 seed = str(int(seed) + int(o[0]))
-#                 break
-#         for o in tth:
-#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-#                 seed = str(int(seed) + int(o[0]))
-#                 break
-#         for o in htl:
-#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-#                 seed = str(int(seed) + int(o[0]))
-#                 break
-#
-#         newSeeds.append(int(seed))
+    loopCounter += 1
+    currentSeed = closestSeed
+    staticSeed = closestSeed
+    for s in htl:
+        if s[0][0] <= currentSeed <= s[0][1]:
+            currentSeed = currentSeed + s[1]
+            break
+    for s in tth:
+        if s[0][0] <= currentSeed <= s[0][1]:
+            currentSeed = currentSeed + s[1]
+            break
+    for s in ltt:
+        if s[0][0] <= currentSeed <= s[0][1]:
+            currentSeed = currentSeed + s[1]
+            break
+    for s in wtl:
+        if s[0][0] <= currentSeed <= s[0][1]:
+            currentSeed = currentSeed + s[1]
+            break
+    for s in ftw:
+        if s[0][0] <= currentSeed <= s[0][1]:
+            currentSeed = currentSeed + s[1]
+            break
+    for s in stf:
+        if s[0][0] <= currentSeed <= s[0][1]:
+            currentSeed = currentSeed + s[1]
+            break
+    for s in sts:
+        if s[0][0] <= currentSeed <= s[0][1]:
+            currentSeed = currentSeed + s[1]
+            break
 
-# print(closestSeed)
+    if inSeedRange(currentSeed):
+        print(staticSeed) # <<<< The answer
+        break
+    else:
+        closestSeed += 1
