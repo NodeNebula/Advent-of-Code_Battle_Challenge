@@ -1,9 +1,15 @@
+def inSeedRange(seed):
+    for ranges in seedInfo:
+        if ranges[0] <= seed <= ranges[1]:
+            return True
+
+
 searching = {"sts": False, "stf": False, "ftw": False, "wtl": False, "ltt": False, "tth": False, "htl": False}
 
 seedInfo = []
 sts, stf, ftw, wtl, ltt, tth, htl = [], [], [], [], [], [], []
 
-with open("input.txt") as file:
+with open("test.txt") as file:
     for line in file:
         if "seeds:" in line:
             seeds = line.split(":")[1].strip(" ").strip("\n").split(" ")
@@ -11,7 +17,7 @@ with open("input.txt") as file:
                 if info % 2 != 0:
                     continue
                 else:
-                    seedInfo.append([seeds[info], seeds[info + 1]])
+                    seedInfo.append([int(seeds[info]), int(seeds[info]) + int(seeds[info + 1])])
 
         elif "seed-to-soil map:" in line or searching["sts"]:
             if line.startswith("\n"):
@@ -104,47 +110,54 @@ with open("input.txt") as file:
             if not searching["htl"]:
                 searching["htl"] = True
 
-newSeeds = []
+inSeedRange(seeds)
 
-for i in range(len(seedInfo)):
-    currentSeed = str(int(seedInfo[i][0]) - 1)
-    staticSeed = currentSeed
-    for j in range(int(seedInfo[i][1])):
+# ---------
 
-        print(staticSeed, "-", j)
+closestSeed = 0
 
-        currentSeed = str(int(currentSeed) + 1)
-        seed = str(int(currentSeed) + 1)
+# while True:
+#     break
 
-        for o in sts:
-            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-                seed = str(int(seed) + int(o[0]))
-                break
-        for o in stf:
-            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-                seed = str(int(seed) + int(o[0]))
-                break
-        for o in ftw:
-            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-                seed = str(int(seed) + int(o[0]))
-                break
-        for o in wtl:
-            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-                seed = str(int(seed) + int(o[0]))
-                break
-        for o in ltt:
-            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-                seed = str(int(seed) + int(o[0]))
-                break
-        for o in tth:
-            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-                seed = str(int(seed) + int(o[0]))
-                break
-        for o in htl:
-            if int(o[1][0]) <= int(seed) <= int(o[1][1]):
-                seed = str(int(seed) + int(o[0]))
-                break
+# for i in range(len(seedInfo)):
+#     currentSeed = str(int(seedInfo[i][0]) - 1)
+#     staticSeed = currentSeed
+#     for j in range(int(seedInfo[i][1])):
+#
+#         print(staticSeed, "-", j)
+#
+#         currentSeed = str(int(currentSeed) + 1)
+#         seed = str(int(currentSeed) + 1)
+#
+#         for o in sts:
+#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+#                 seed = str(int(seed) + int(o[0]))
+#                 break
+#         for o in stf:
+#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+#                 seed = str(int(seed) + int(o[0]))
+#                 break
+#         for o in ftw:
+#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+#                 seed = str(int(seed) + int(o[0]))
+#                 break
+#         for o in wtl:
+#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+#                 seed = str(int(seed) + int(o[0]))
+#                 break
+#         for o in ltt:
+#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+#                 seed = str(int(seed) + int(o[0]))
+#                 break
+#         for o in tth:
+#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+#                 seed = str(int(seed) + int(o[0]))
+#                 break
+#         for o in htl:
+#             if int(o[1][0]) <= int(seed) <= int(o[1][1]):
+#                 seed = str(int(seed) + int(o[0]))
+#                 break
+#
+#         newSeeds.append(int(seed))
 
-        newSeeds.append(int(seed))
-
-print(min(newSeeds))
+# print(closestSeed)
